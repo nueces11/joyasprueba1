@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Tienda de Joyas Rancagua</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #2E4052; /* Color de fondo suave */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #456990; /* Azul oscuro elegante */
+            padding: 10px;
+        }
+
+        h1 {
+            color: #FFC857; /* Blanco suave para el texto */
+            margin: 0;
+            font-family: 'Georgia', serif;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        main {
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .horizontal-box-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-top: 20px;
+            overflow-x: auto;
+            justify-content: center;
+        }
+
+        .side-box,
+        .new-side-box,
+        .presentation-box {
+            background-color: #BDD9BF; /* Gris claro para los cuadros blancos */
+            padding: 1px; /* Aumenté el padding para aumentar el espacio de la carta de presentación */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            width: calc(63.33% - 40px); /* Ajusté el ancho para tener más espacio */
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #333; /* Texto oscuro para mayor contraste */
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .side-box:hover,
+        .new-side-box:hover {
+            transform: scale(1.05);
+        }
+
+        .side-box a,
+        .new-side-box a,
+        .presentation-box a {
+            text-decoration: none;
+            color: #333; /* Texto oscuro para mayor contraste */
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .side-box p,
+        .presentation-box p {
+            margin-top: 10px;
+            font-size: 14px; /* Ajusté el tamaño del texto para mayor legibilidad */
+            color: #333; /* Texto oscuro para mayor contraste */
+            pointer-events: none;
+        }
+
+        .side-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #333; /* Texto oscuro para el overlay */
+            font-size: 18px;
+            font-weight: bold;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #394240; /* Azul oscuro elegante */
+            overflow: hidden;
+            height: 170px;
+        }
+
+        section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #FFFFFF; /* Gris claro para el pie de página */
+            padding: 10px;
+            margin-top: auto;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            font-size: 20px; /* Reduje el tamaño de los iconos para dispositivos móviles */
+        }
+
+        .social-icons a {
+            color: #333; /* Texto oscuro para mayor contraste */
+            transition: transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+
+        .terms-container {
+            /* Quité display: none; */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .terms-box {
+            background-color: #fff;
+            padding: 20px;
+            max-width: 600px;
+            width: 80%;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .close-terms {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .terms-content {
+            max-height: 400px; /* Ajusta la altura máxima según sea necesario */
+            overflow-y: auto; /* Añade un desbordamiento vertical */
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Tu Tienda de Joyas Rancagua</h1>
+    </header>
+    <!-- Contenido principal -->
+    <main>
+        <!-- Texto de Presentación -->
+        <div class="presentation-box">
+            <h2>Presentación</h2>
+            <p style="font-size: 16px; color: #333; line-height: 1.6;">
+                Bienvenido a mi tienda de joyas. Descubre variadas cadenas de plata Ley 925 a precios económicos.
+                Cada pieza está cuidadosamente seleccionada para brindarte elegancia y estilo.
+            </p>
+            <p style="font-size: 14px; color: #777; margin-top: 10px;">Para consultas personales, contáctanos al: [Número de WhatsApp]</p>
+        </div>
+
+        <!-- Nuevos cuadros blancos en una línea vertical -->
+        <div class="horizontal-box-container">
+            <div class="side-box" onclick="goToJoya('joya1')">
+                <a href="javascript:void(0);">
+
+                </a>
+                <div class="overlay-text">Cadenas Ley 925</div>
+                <!-- Actualiza la ruta de la imagen con el nombre de tu imagen descargada -->
+                <img src="cadenadeplata.jpg" alt="Cadena de plata">
+            </div>
+            <!-- Agrega más cuadros según sea necesario -->
+        </div>
+
+        <!-- Sección principal -->
+        <section>
+            <!-- Contenido principal -->
+        </section>
+    </main>
+
+    <!-- Sección de Términos y Condiciones -->
+    <div class="terms-container" id="termsContainer">
+        <div class="terms-box">
+            <span class="close-terms" onclick="closeTerms()">&times;</span>
+            <h2>Términos y Condiciones</h2>
+            <div class="terms-content">
+                <p>Fecha de entrada en vigencia: [Fecha de entrada en vigencia]
+
+Agradecemos tu interés en "Elegancia Radiante", tu tienda de joyas donde la elegancia se encuentra con la excelencia. Antes de realizar tu compra, te pedimos que revises detenidamente nuestros términos y condiciones para garantizar una experiencia de compra satisfactoria. Al acceder y utilizar nuestros servicios, aceptas automáticamente los términos descritos a continuación.
+
+1. Descripción General:
+
+"Elegancia Radiante" se dedica a ofrecer joyas exclusivas y de alta calidad. Nuestros productos están diseñados para realzar tu belleza y complementar tu estilo. Cada joya es seleccionada con cuidado y pasión para asegurar la satisfacción de nuestros clientes.
+
+2. Proceso de Compra:
+
+2.1 Disponibilidad de Productos:
+La disponibilidad de los productos está sujeta a cambios. Nos esforzamos por mantener nuestro inventario actualizado, pero en ocasiones, ciertos productos pueden estar agotados. En tal caso, te informaremos oportunamente y te ofreceremos alternativas si están disponibles.
+
+2.2 Precios y Promociones:
+Los precios de nuestros productos se muestran en la moneda local y están sujetos a cambios sin previo aviso. Las promociones y descuentos se aplicarán según las condiciones especificadas en cada oferta.
+
+3. Envíos y Entregas:
+
+3.1 Zonas de Entrega:
+Realizamos envíos a [lista de zonas]. Asegúrate de proporcionar la dirección correcta para garantizar una entrega exitosa.
+
+3.2 Costos de Envío:
+Los costos de envío se calcularán durante el proceso de pago y se basarán en la ubicación de entrega y el método seleccionado.
+
+3.3 Tiempo de Entrega:
+El tiempo estimado de entrega se proporcionará durante el proceso de compra. Este puede variar según la ubicación y las condiciones logísticas.
+
+4. Pagos y Métodos de Pago:
+
+4.1 Seguridad de Pago:
+Garantizamos la seguridad de tus datos durante el proceso de pago. Utilizamos tecnologías seguras para proteger la información de tu tarjeta de crédito u otros métodos de pago.
+
+4.2 Métodos de Pago:
+Aceptamos varios métodos de pago, incluyendo tarjetas de crédito, transferencias bancarias y [otros métodos]. Selecciona el método que mejor se adapte a tus necesidades.
+
+5. Devoluciones y Reembolsos:
+
+5.1 Política de Devoluciones:
+Aceptamos devoluciones dentro de los [días] días posteriores a la recepción del producto. Los artículos deben estar en su condición original y con etiquetas intactas.
+
+5.2 Proceso de Reembolso:
+Los reembolsos se procesarán según el método de pago original y pueden tardar varios días hábiles en reflejarse en tu cuenta.
+
+6. Garantía de Calidad:
+
+Garantizamos la calidad de nuestras joyas. Si recibes un producto defectuoso, por favor, contáctanos de inmediato para resolver la situación.
+
+7. Propiedad Intelectual:
+
+Los derechos de propiedad intelectual, incluyendo marcas registradas y derechos de autor, asociados con los productos y contenido de "Elegancia Radiante" son propiedad exclusiva de nuestra tienda.
+
+8. Privacidad y Seguridad:
+
+Respetamos tu privacidad y tomamos medidas para proteger tu información personal. Consulta nuestra Política de Privacidad para obtener más detalles.
+
+9. Comunicación:
+
+Nos comunicaremos contigo a través de la información proporcionada durante el proceso de compra. Asegúrate de proporcionar datos precisos y actualizados.
+
+10. Modificaciones a los Términos y Condiciones:
+
+Nos reservamos el derecho de modificar estos términos y condiciones en cualquier momento. Las modificaciones entrarán en vigencia inmediatamente después de su publicación en nuestro sitio web.
+
+Te agradecemos por elegir "Elegancia Radiante". Estamos comprometidos a brindarte una experiencia de compra excepcional y joyas que realcen tu belleza con elegancia radiante. Si tienes alguna pregunta o inquietud, no dudes en contactarnos.
+
+Atentamente,
+
+[Nombre de la Tienda]
+"Elegancia Radiante"</p>
+            </div>
+            <button onclick="closeTerms()">Cerrar</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/_sepulvedaaaa/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p>Todos los derechos reservados &copy; 2024</p>
+    </footer>
+    <script>
+        // Verificar si los términos se han mostrado antes
+        var termsShown = localStorage.getItem('termsShown');
+
+        if (!termsShown) {
+            // Si no se han mostrado, abrir la ventana emergente
+            openTerms();
+            // Marcar como mostrados
+            localStorage.setItem('termsShown', 'true');
+        }
+
+        function goToJoya(joya) {
+            window.location.href = 'detalle.html#' + joya;
+        }
+
+        function openTerms() {
+            document.getElementById('termsContainer').style.display = 'flex';
+        }
+
+        function closeTerms() {
+            document.getElementById('termsContainer').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
